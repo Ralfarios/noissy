@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Noissy</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0 14vw;
+    }
+
+    .formField{
+      margin-top: 32px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar part -->
+
+  <%- include('partials/navbar') %>
+
+    <!-- Body part -->
+
+    <div>
+      <h3>You have an Account? Nice, Let's login!</h3>
+
+      <!-- Form field -->
+
+      <form class="formField" action="#" method="POST">
+        <label for="email">Email</label>
+        <input type="email" class="nes-input" name="email"><br><br>
+        <label for="password">Password</label>
+        <input type="password" class="nes-input" name="password"><br><br>
+        <input type="submit" class="nes-btn is-primary" value="Login">
+      </form>
+    </div>
+
+</body>
+
+</html>

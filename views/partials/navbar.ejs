@@ -1,0 +1,57 @@
+<style>
+    ul {
+        list-style-type: none;
+        margin: 4vh 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    li {
+        text-align: center;
+        float: left;
+    }
+
+    li:first-child {
+        float: left;
+    }
+
+    li:last-child {
+        float: right;
+    }
+
+    a,
+    .logoText {
+        display: block;
+        padding: 14px;
+        margin-right: 1vw;
+    }
+
+    li a {
+        display: block;
+        text-align: center;
+    }
+
+    .logo {
+        display: flex;
+    }
+</style>
+
+<div>
+    <ul>
+
+        <!-- This is Logo -->
+        <li>
+            <div class="logo">
+                <i class="nes-jp-logo"></i>
+                <p class="logoText">Noissy</p>
+            </div>
+        </li>
+
+        <!-- Navbar button part -->
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/signup">Register</a></li>
+        <li><button type="button" onclick="location.href='/login'" class="nes-btn is-primary">Login</button></li>
+
+    </ul>
+</div>
