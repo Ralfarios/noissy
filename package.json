@@ -1,0 +1,26 @@
+{
+  "name": "noissy_chat",
+  "version": "1.0.0",
+  "description": "Made by `Muamar Al Farabi` and `Febriansyah` for academic purpose (Pair Project for Phase 1, Glasgow Fox 2020, Hacktiv8).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ralfarios/pairProject-phase1-glassgowFox.git"
+  },
+  "keywords": [],
+  "author": "Muamar Al Farabi, Febriansyah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ralfarios/pairProject-phase1-glassgowFox/issues"
+  },
+  "homepage": "https://github.com/Ralfarios/pairProject-phase1-glassgowFox#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5"
+  }
+}
