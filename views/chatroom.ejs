@@ -154,6 +154,10 @@
 
       // Emit message to server
       socket.emit('chatMessage', msg);
+
+      // CLear input
+      e.target.elements.msg.value = '';
+      e.target.elements.msg.focus();
     });
 
     //Output Message
