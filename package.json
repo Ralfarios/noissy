@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/Ralfarios/pairProject-phase1-glassgowFox#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "nes.css": "^2.3.0",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5"
