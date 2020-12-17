@@ -77,7 +77,7 @@
 </head>
 
 <body>
-  
+
   <div class="join-container">
     <header class="join-header">
       <h1>Chat List</h1>
@@ -86,19 +86,17 @@
     <main class="join-main">
       <form action="/chat" method="POST">
         <div class="form-control">
-          <label for="username">Your Name</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Enter username..."
-            required
-          />
+          <label for="userName">Username</label>
+          <select name="userName" id="userName">
+            <% user.forEach(el => { %>
+            <option value="<%= el.id %>"><%= el.userName %></option>
+            <% }); %>
+          </select>
         </div>
         <div class="form-control">
           <label for="room">Room</label>
           <select name="chatroomname" id="room">
-            <% data.forEach(el => { %>
+            <% room.forEach(el => { %>
             <option value="<%= el.id %>"><%= el.chatroomname %></option>
             <% }); %>
           </select>
@@ -108,7 +106,6 @@
       </form>
     </main>
   </div>
-
   
 </body>
 

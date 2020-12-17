@@ -73,7 +73,7 @@
       background-color: white;
     }
 
-    .footerChatBox {
+    #footerChatBox {
       display: flex;
     }
 
@@ -112,27 +112,8 @@
   <!-- Chat Message part -->
 
   <div class="chatMessagePart">
-    <div>
-      <h1>PLACE HOLDER0</h1>
-      <h1>PLACE HOLDER1</h1>
-      <h1>PLACE HOLDER2</h1>
-      <h1>PLACE HOLDER3</h1>
-      <h1>PLACE HOLDER4</h1>
-      <h1>PLACE HOLDER5</h1>
-      <h1>PLACE HOLDER6</h1>
-      <h1>PLACE HOLDER7</h1>
-      <h1>PLACE HOLDER8</h1>
-      <h1>PLACE HOLDER9</h1>
-      <h1>PLACE HOLDER0</h1>
-      <h1>PLACE HOLDER1</h1>
-      <h1>PLACE HOLDER2</h1>
-      <h1>PLACE HOLDER3</h1>
-      <h1>PLACE HOLDER4</h1>
-      <h1>PLACE HOLDER5</h1>
-      <h1>PLACE HOLDER6</h1>
-      <h1>PLACE HOLDER7</h1>
-      <h1>PLACE HOLDER8</h1>
-      <h1>PLACE HOLDER9</h1>
+    <div class="message">
+
     </div>
   </div>
 
@@ -140,17 +121,53 @@
 
   <div class="footerChatBoxPart">
     <div class="footerChatBoxCont">
-      <div class="footerChatBox">
-        <input type="text" name="typeChat" class="nes-input chatBox">
-        <button type="button" class="nes-btn is-primary chatSubmit">Send</button>
-      </div>
+      <form id="footerChatBox">
+        <input id="msg" type="text" name="typeChat" 
+        placeholder="Enter Message"class="nes-input chatBox" required>
+        
+        <button class="nes-btn is-primary chatSubmit">Send</button>
+      </form>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous"></script>
   <script src="/socket.io/socket.io.js"></script>
+  
   <script>
     const socket = io();
+    
+    // Message from Server
+    socket.on('message', message => {
+      console.log(message);
+      outputMessage(message)
+    });
+
+    // Query DOM
+    const footerChatBox = document.getElementById('footerChatBox');
+
+    // Messages submit
+    footerChatBox.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Get message text
+      const msg = e.target.elements.msg.value;
+
+      // Emit message to server
+      socket.emit('chatMessage', msg);
+    });
+
+    //Output Message
+    const outputMessage = (message) => {
+      const div = document.createElement('div');
+      div.classList.add('message');
+      div.innerHTML = `<p>username <span>9:12</span></p>
+      <p>
+        ${message}
+      </p>`;
+      document.querySelector('.chatMessagePart').appendChild(div);
+    };
   </script>
+
 </body>
 
 </html>

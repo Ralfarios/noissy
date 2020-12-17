@@ -58,9 +58,14 @@ class Controller {
   };
 
   static getChatList(req, res) {
+    
+    let room = null
     ChatRoom.findAll()
     .then(data => {
-      res.render('chatlist', { data });
+      room = data;
+      return User.findAll()
+    }).then(user => {
+      res.render('chatlist', { room, user });
     }).catch(err => {
       res.send(err.message);
     })
@@ -68,12 +73,14 @@ class Controller {
   };
 
   static postChatList(req, res) {
-    const id = {
-      chatroomname: +req.body.chatroomname
+    const newUserChatRoom = {
+      UserId: +req.body.userName,
+      ChatRoomId: +req.body.chatroomname
+
     }
-    User.findAll()
+    UserChatRoom.create(newUserChatRoom)
       .then(data => {
-          res.redirect(`/chat/${id.chatroomname}`);
+          res.redirect(`/chat/${newUserChatRoom.ChatRoomId}`);
       }).catch(err => {
         res.send(err.message)
       })

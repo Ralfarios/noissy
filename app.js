@@ -26,8 +26,23 @@ app.use(express.urlencoded({ extended: true }));
 // Run when client connects
 io.on('connection', socket => {
   console.log('New client connection..');
-})
 
+  // Welcome
+  socket.emit('message', 'Welcome to Noissy !');
+
+  // broadcast when a user connects
+  socket.broadcast.emit('message', 'Someone has joined the chat');
+
+  // Run when client disconnected
+  socket.on('disconnect', () => {
+    io.emit('message', 'Someone has left the chat');
+  });
+
+  // Listen for chatMessage
+  socket.on('chatMessage', (msg) => {
+    io.emit('message', msg)
+  });
+});
 // Router
 app.use('/', router);
 
