@@ -21,7 +21,7 @@ router.use(auth);
 router.get('/chat', Controller.getChatList);
 router.post('/chat', Controller.postChatList)
 
-router.get('/chat/:id', (req, res) => res.render('chatroom'));
+router.get('/chat/:id', Controller.getChatRoom);
 
 
 module.exports = router;

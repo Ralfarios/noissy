@@ -164,7 +164,7 @@
     const outputMessage = (message) => {
       const div = document.createElement('div');
       div.classList.add('message');
-      div.innerHTML = `<p>username <span>9:12</span></p>
+      div.innerHTML = `<p>username <span>${new Date()}</span></p>
       <p>
         ${message}
       </p>`;
