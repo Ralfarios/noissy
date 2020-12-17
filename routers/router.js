@@ -1,14 +1,26 @@
+const Controller = require('../controllers/controller.js');
+const auth = require('../helpers/auth.js');
+
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req,res) => res.send('LANDING PAGE'));
 
-router.get('/login', (req,res) => res.send('LOGIN PAGE'));
+router.get('/', Controller.homePage);
+router.get('/login', Controller.loginForm);
+router.post('/login', Controller.login);
 
-router.get('/signup', (req,res) => res.send('SIGN UP PAGE'));
+router.get('/signup', Controller.signUpForm);
+router.post('/signup', Controller.signUp);
 
-router.get('/chat', (req,res) => res.send('CHAT LIST PAGE'));
+router.get('/about', (req, res) => res.render('about'));
 
-router.get('/chat/:id', (req,res) => res.send('CHAT ROOM PAGE'));
+router.get('/logout', Controller.logout);
+
+router.use(auth);
+
+router.get('/chat', Controller.chatList);
+
+router.get('/chat/:id', (req, res) => res.render('chatroom'));
+
 
 module.exports = router;
