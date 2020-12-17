@@ -57,7 +57,17 @@ class Controller {
       .catch(err => res.send(err))
   };
 
-  static chatList(req, res) {
+  static getChatList(req, res) {
+    ChatRoom.findAll()
+    .then(data => {
+      res.render('chatlist', { data });
+    }).catch(err => {
+      res.send(err);
+    })
+    
+  };
+
+  static postChatList(req, res) {
     res.render('chatlist');
   };
 
