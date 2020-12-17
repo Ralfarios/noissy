@@ -4,124 +4,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-  <title>Document</title>
+  <title>Home | Noissy</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
+    div.userInfoContainer {
+      padding: 1px 14vw;
+      background-color: #212529;
+      color: white;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 4vh 0;
       padding: 0;
+      overflow: hidden;
     }
 
-    .join-container {
-      max-width: 500px;
-      margin: 80px auto;
-      color: rgb(219, 48, 25);
-    }
-
-    .join-header {
+    li {
       text-align: center;
-      padding: 20px;
-      background: var(--dark-color-a);
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      float: left;
     }
 
-    .join-main {
-      padding: 30px 40px;
-      background: var(--dark-color-b);
+    li:last-child {
+      float: right;
     }
 
-    .join-main p {
-      margin-bottom: 20px;
+    .userInfo {
+      display: flex;
     }
 
-    .join-main .form-control {
-      margin-bottom: 20px;
+    .footerChatBoxPart {
+      /* margin: 0 14vw; */
+      width: 100%;
     }
 
-    .join-main label {
+    .headerChat {
+      /* background-color: #212529; */
+      /* color: white; */
+      width: 100%;
+      margin: 0 0;
+      padding: 2vh 14vw;
+      display: inline-flex;
+      background-color: #212529;
+      color: white;
+    }
+
+    .bodyPart {
+      padding: 2vh 14vw;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 0.39062rem 2rem;
+    }
+
+    /* Chat Message part */
+
+    .chatMessagePart {
+      height: 1%;
+      padding: 32px 14vw 16vh 14vw;
+    }
+
+    /* Footer Chatbox part */
+
+    .footerChatBoxCont {
+      padding: 16px 0;
       display: block;
-      margin-bottom: 5px;
+      position: fixed;
+      bottom: 0;
+      width: inherit;
+      background-color: white;
     }
 
-    .join-main input[type='text'] {
-      font-size: 16px;
-      padding: 5px;
-      height: 40px;
-      width: 100%;
+    #footerChatBox {
+      display: flex;
     }
 
-    .join-main select {
-      font-size: 16px;
-      padding: 5px;
-      height: 40px;
-      width: 100%;
+    .chatBox {
+      margin-left: 14vw;
+      margin-right: 1.175vw;
     }
 
-    .join-main .btn {
-      margin-top: 20px;
-      width: 100%;
+    .chatSubmit {
+      margin-right: 14vw;
     }
 
-    .btn {
-      cursor: pointer;
-      padding: 5px 15px;
-      background-color: coral;
-      color: azure;
-      border: 0;
-      font-size: 17px;
+    .inliner {
+      display: flex;
+    }
+
+    .nes-btn.is-primary{
+      margin-left: 24px;
     }
   </style>
 </head>
 
 <body>
-  <div class="join-container">
-    <header class="join-header">
-      <h1>Chat List</h1>
-      <h1></i> Noissy</h1>
-    </header>
-      <main class="join-main">
-        <form action="/chat=<%=user[0].id%>" method="POST">
-          <div class="form-control">
-            <label for="userid">Username</label>
 
-            <select name="userid" id="userName">
-              <% user.forEach(el=> { %>
-                <option value="<%= el.id %>">
-                  <%= el.userName %>
-                </option>
-                <% }); %>
-            </select>
-          </div>
-          <div class="form-control">
-            <label for="chatroomid">Room</label>
-            <select name="chatroomid" id="room">
-              <% data.forEach(el=> { %>
-                <option value="<%= el.ChatRoomId %>">
-                  <%= el.ChatRoom.chatroomname %>
-                </option>
-                <% }); %>
-            </select>
-          </div>
-          <button type="submit" class="btn">Join Chat</button>
-          <button onclick="location.href='/logout'" type="button" class="btn">Signout</button>
-        </form>
+  <!-- User Info part -->
 
-        <form action="/addroom", method="POST">
-          <label for="chatroomname">Chat Room Name</label>
-          <input type="text" name="chatroomname">
-          <input type="submit" value="Create Room">
-        </form>
+  <div class="userInfoContainer">
+    <ul>
 
-        <form action="/joinchat/<%= user[0].id %>", method="POST">
-          <label for="roomName">Chat Room Name</label>
-          <input type="text" name="roomName">
-          <input type="submit" value="Join Room">
-        </form>
-      </main>
+      <!-- This is User Info -->
+      <li>
+        <div class="userInfo">
+          <i class="nes-jp-logo"></i>
+          <h2>
+            Noissy
+          </h2>
+        </div>
+      </li>
+
+      <!-- User Info button part -->
+      <li><button type="button" onclick="location.href='/logout'" class="nes-btn is-error">Logout</button></li>
+    </ul>
   </div>
+
+  <!-- Chat Message part -->
+  <div class="bodyPart">
+    <form action="/chat=<%=user[0].id%>" method="post"></form>
+    <div class="form-control">
+
+      <label for="userid" hidden>Username</label>
+      <select name="userid" id="userName" hidden>
+        <% user.forEach(el=> { %>
+          <option value="<%= el.id %>" hidden>
+            <%= el.userName %>
+          </option>
+          <% }); %>
+      </select>
+
+      <h2>Welcome, <%= user[0].userName %>!</h2>
+
+      <br>
+
+      <div class="nes-select">
+        <label for="roomName">Your Chat Room List</label>
+        <select id="default_select" name="roomName">
+          <option value="" disabled selected hidden>Select...</option>
+          <% data.forEach(el=> { %>
+            <option value="<%= el.ChatRoom.chatroomname %>">
+              <%= el.ChatRoom.chatroomname %>
+            </option>
+            <% }); %>
+        </select>
+      </div>
+
+      <br>
+
+      <h2>Or</h2>
+
+      <br>
+
+      <form action="/addroom" method="post">
+        <% user.forEach(el=> { %>
+          <input type="number" name="userid" value="<%= el.id %>" readonly hidden>
+          <% }); %>
+
+            <div class="nes-field">
+              <label for="chatroomname">Create new chat room!</label>
+            </div>
+            <div class="nes-field inliner">
+              <input type="text" name="chatroomname" id="name_field" class="nes-input">
+
+              <input type="submit" class="nes-btn is-primary" value="Create Room">
+            </div>
+      </form>
+      <br><br>
+      <form action="/joinchat/<%= user[0].id %>" , method="POST">
+        <label for="roomName">Know your room yet? Cool, let's join!</label>
+        <div class="nes-field inliner">
+          <input type="text" class="nes-input" name="roomName">
+          <input type="submit" class="nes-btn is-primary" value="Join Room">
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"
+    integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w=="
+    crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
 </body>
 

@@ -96,7 +96,7 @@ class Controller {
     UserChatRoom.findByPk(chatRoom.ChatRoomId)
       .then(data => {
         console.log(data);
-        res.redirect(`/chat/${chatRoom.ChatRoomId}`);
+        res.redirect(`/chat=${UserId}/${chatRoom.ChatRoomId}`);
       }).catch(err => {
         res.send(err.message)
       })
@@ -109,12 +109,15 @@ class Controller {
 
     console.log(req.params.id);
 
-    const paramId = +req.params.id
+    const paramId = +req.body.userid
 
     ChatRoom.create(newChatRoom)
-      .then(() => {
-        res.redirect(`/chat/${paramId}`)
+      .then(data => {
+        console.log(data);
+        // res.redirect(`/chat=${paramId}/`)
+        return UserChatRoom.create({ ChatRoomId: data.id, UserId: paramId })
       })
+      .then(() => res.redirect(`/chat=${paramId}/`))
       .catch(err => res.send(err));
 
     console.log(newChatRoom);
@@ -125,23 +128,23 @@ class Controller {
     const userId = +req.params.id;
 
 
-    ChatRoom.findAll({where:{chatroomname:roomName}, include:[UserChatRoom]})
+    ChatRoom.findAll({ where: { chatroomname: roomName }, include: [UserChatRoom] })
       .then((data) => {
         res.redirect(`/chat=${userId}/${data[0].id}`)
       })
   }
 
-  static getChatRoom(req,res) {
+  static getChatRoom(req, res) {
     let roomid = +req.params.roomid;
     let id = +req.params.id;
 
     console.log(id)
-    UserChatRoom.findAll({where:{ChatRoomId:roomid}, include:[User, ChatRoom]})
-    .then((data) => {
-      console.log(JSON.stringify(data, null , 2));
-      res.render('chatroom', {data, id})
-    })
-    .catch(err => res.send(err));
+    UserChatRoom.findAll({ where: { ChatRoomId: roomid }, include: [User, ChatRoom] })
+      .then((data) => {
+        console.log(JSON.stringify(data, null, 2));
+        res.render('chatroom', { data, id })
+      })
+      .catch(err => res.send(err));
   }
 
   static logout(req, res) {
