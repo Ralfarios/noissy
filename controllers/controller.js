@@ -49,7 +49,7 @@ class Controller {
       .then(data => {
         if (data && comparePass(password, data.password)) {
           req.session.email = email;
-          res.redirect('/chat');
+          res.redirect(`/chat=${data.id}`);
         } else {
           throw 'Invalid Password';
         }
@@ -58,33 +58,91 @@ class Controller {
   };
 
   static getChatList(req, res) {
-    
-    let room = null
-    ChatRoom.findAll()
-    .then(data => {
-      room = data;
-      return User.findAll()
-    }).then(user => {
-      res.render('chatlist', { room, user });
-    }).catch(err => {
-      res.send(err.message);
-    })
-    
+
+    let user;
+    User.findAll({ where: { id: +req.params.id } })
+      .then(data => {
+        user = data;
+        return UserChatRoom.findAll({ where: { UserId: +req.params.id }, include: [ChatRoom] })
+      })
+      .then(data => {
+        res.render('chatlist', { user, data });
+      })
+      .catch(err => {
+        res.send(err.message)
+      })
+
+    // let room = null
+    // ChatRoom.findAll()
+    //   .then(data => {
+
+    //     room = data;
+    //     return User.findAll({ where: { id: +req.params.id } })
+    //   }).then(user => {
+    //     console.log(user);
+    //     res.render('chatlist', { room, user });
+    //   }).catch(err => {
+    //     res.send(err.message);
+    //   })
+
   };
 
   static postChatList(req, res) {
-    const newUserChatRoom = {
-      UserId: +req.body.userName,
-      ChatRoomId: +req.body.chatroomname
-
+    const chatRoom = {
+      UserId: +req.body.userid,
+      ChatRoomId: +req.body.chatroomid
     }
-    UserChatRoom.create(newUserChatRoom)
+
+    UserChatRoom.findByPk(chatRoom.ChatRoomId)
       .then(data => {
-          res.redirect(`/chat/${newUserChatRoom.ChatRoomId}`);
+        console.log(data);
+        res.redirect(`/chat/${chatRoom.ChatRoomId}`);
       }).catch(err => {
         res.send(err.message)
       })
   };
+
+  static postaddChatRoom(req, res) {
+    const newChatRoom = {
+      chatroomname: req.body.chatroomname
+    }
+
+    console.log(req.params.id);
+
+    const paramId = +req.params.id
+
+    ChatRoom.create(newChatRoom)
+      .then(() => {
+        res.redirect(`/chat/${paramId}`)
+      })
+      .catch(err => res.send(err));
+
+    console.log(newChatRoom);
+  }
+
+  static joinChatRoom(req, res) {
+    const roomName = req.body.roomName
+    const userId = +req.params.id;
+
+
+    ChatRoom.findAll({where:{chatroomname:roomName}, include:[UserChatRoom]})
+      .then((data) => {
+        res.redirect(`/chat=${userId}/${data[0].id}`)
+      })
+  }
+
+  static getChatRoom(req,res) {
+    let roomid = +req.params.roomid;
+    let id = +req.params.id;
+
+    console.log(id)
+    UserChatRoom.findAll({where:{ChatRoomId:roomid}, include:[User, ChatRoom]})
+    .then((data) => {
+      console.log(JSON.stringify(data, null , 2));
+      res.render('chatroom', {data, id})
+    })
+    .catch(err => res.send(err));
+  }
 
   static logout(req, res) {
     delete req.session.email;

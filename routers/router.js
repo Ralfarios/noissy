@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 router.get('/', Controller.homePage);
+
 router.get('/login', Controller.loginForm);
 router.post('/login', Controller.login);
 
@@ -18,10 +19,13 @@ router.get('/logout', Controller.logout);
 
 router.use(auth);
 
-router.get('/chat', Controller.getChatList);
-router.post('/chat', Controller.postChatList)
+router.get('/chat=:id', Controller.getChatList);
+router.post('/chat=:id', Controller.postChatList)
 
-router.get('/chat/:id', (req, res) => res.render('chatroom'));
+router.post('/addroom', Controller.postaddChatRoom);
+router.post('/joinchat/:id', Controller.joinChatRoom);
+
+router.get('/chat=:id/:roomid', Controller.getChatRoom);
 
 
 module.exports = router;

@@ -4,12 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
-			crossorigin="anonymous"
-		/>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
   <title>Document</title>
   <style>
     * {
@@ -17,11 +13,13 @@
       margin: 0;
       padding: 0;
     }
+
     .join-container {
       max-width: 500px;
       margin: 80px auto;
       color: rgb(219, 48, 25);
     }
+
     .join-header {
       text-align: center;
       padding: 20px;
@@ -29,6 +27,7 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
+
     .join-main {
       padding: 30px 40px;
       background: var(--dark-color-b);
@@ -65,6 +64,7 @@
       margin-top: 20px;
       width: 100%;
     }
+
     .btn {
       cursor: pointer;
       padding: 5px 15px;
@@ -77,36 +77,52 @@
 </head>
 
 <body>
-
   <div class="join-container">
     <header class="join-header">
       <h1>Chat List</h1>
       <h1></i> Noissy</h1>
     </header>
-    <main class="join-main">
-      <form action="/chat" method="POST">
-        <div class="form-control">
-          <label for="userName">Username</label>
-          <select name="userName" id="userName">
-            <% user.forEach(el => { %>
-            <option value="<%= el.id %>"><%= el.userName %></option>
-            <% }); %>
-          </select>
-        </div>
-        <div class="form-control">
-          <label for="room">Room</label>
-          <select name="chatroomname" id="room">
-            <% room.forEach(el => { %>
-            <option value="<%= el.id %>"><%= el.chatroomname %></option>
-            <% }); %>
-          </select>
-        </div>
-        <button type="submit" class="btn">Join Chat</button>
-        <button onclick="location.href='/logout'" type="button" class="btn">Signout</button>
-      </form>
-    </main>
+      <main class="join-main">
+        <form action="/chat=<%=user[0].id%>" method="POST">
+          <div class="form-control">
+            <label for="userid">Username</label>
+
+            <select name="userid" id="userName">
+              <% user.forEach(el=> { %>
+                <option value="<%= el.id %>">
+                  <%= el.userName %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <div class="form-control">
+            <label for="chatroomid">Room</label>
+            <select name="chatroomid" id="room">
+              <% data.forEach(el=> { %>
+                <option value="<%= el.ChatRoomId %>">
+                  <%= el.ChatRoom.chatroomname %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <button type="submit" class="btn">Join Chat</button>
+          <button onclick="location.href='/logout'" type="button" class="btn">Signout</button>
+        </form>
+
+        <form action="/addroom", method="POST">
+          <label for="chatroomname">Chat Room Name</label>
+          <input type="text" name="chatroomname">
+          <input type="submit" value="Create Room">
+        </form>
+
+        <form action="/joinchat/<%= user[0].id %>", method="POST">
+          <label for="roomName">Chat Room Name</label>
+          <input type="text" name="roomName">
+          <input type="submit" value="Join Room">
+        </form>
+      </main>
   </div>
-  
+
 </body>
 
 </html>

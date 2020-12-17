@@ -58,8 +58,7 @@
 
     .chatMessagePart {
       height: 1%;
-      padding: 0 14vw 16vh 14vw;
-      background-color: blue;
+      padding: 32px 14vw 16vh 14vw;
     }
 
     /* Footer Chatbox part */
@@ -98,14 +97,15 @@
       <!-- This is User Info -->
       <li>
         <div class="userInfo">
-          <img class="nes-avatar is-rounded is-medium" alt="Gravatar image example"
-            src="https://www.gravatar.com/avatar?s=15" style="image-rendering: pixelated;">
-          <h2>#USERNAME#</h2>
+          <i class="nes-icon coin is-medium"></i>
+          <h2>
+            <%= data[0].ChatRoom.chatroomname %>
+          </h2>
         </div>
       </li>
 
       <!-- User Info button part -->
-      <li><button type="button" onclick="location.href='/chat'" class="nes-btn is-primary">Back</button></li>
+      <li><button type="button" onclick="location.href='/logout'" class="nes-btn is-primary">Back</button></li>
     </ul>
   </div>
 
@@ -122,20 +122,22 @@
   <div class="footerChatBoxPart">
     <div class="footerChatBoxCont">
       <form id="footerChatBox">
-        <input id="msg" type="text" name="typeChat" 
-        placeholder="Enter Message"class="nes-input chatBox" required>
-        
+        <input id="msg" type="text" name="typeChat" placeholder="Enter Message" class="nes-input chatBox" required>
+
         <button class="nes-btn is-primary chatSubmit">Send</button>
       </form>
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"
+    integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w=="
+    crossorigin="anonymous"></script>
   <script src="/socket.io/socket.io.js"></script>
-  
+
   <script>
+
+
     const socket = io();
-    
+
     // Message from Server
     socket.on('message', message => {
       console.log(message);
@@ -154,16 +156,30 @@
 
       // Emit message to server
       socket.emit('chatMessage', msg);
+
+      e.target.elements.msg.value = '';
+      e.target.elements.msg.focus();
     });
 
     //Output Message
     const outputMessage = (message) => {
       const div = document.createElement('div');
       div.classList.add('message');
-      div.innerHTML = `<p>username <span>9:12</span></p>
-      <p>
-        ${message}
-      </p>`;
+      // div.innerHTML = `<p>Anon <span>9:12</span></p>
+      // <p>
+      //   ${message}
+      // </p>`;
+      div.innerHTML = ` <div style="margin-bottom:16px" >
+       <section class="message-list">
+    <section class="message -left">
+      <!-- Balloon -->
+      <div class="nes-balloon from-left">
+        <p>${message}</p>
+      </div>
+    </section>
+    </div>`;
+
+
       document.querySelector('.chatMessagePart').appendChild(div);
     };
   </script>

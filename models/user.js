@@ -14,10 +14,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsToMany(models.ChatRoom, {
-        through: models.UserChatRoom,
-        foreignKey: "UserId"
-      })
+      User.hasMany(models.UserChatRoom, {foreignKey: 'UserId'})
+      // User.belongsToMany(models.ChatRoom, {
+      //   through: models.UserChatRoom,
+      //   foreignKey: "UserId"
+      // })
     }
   };
   User.init({
