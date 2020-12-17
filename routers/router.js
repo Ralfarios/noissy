@@ -25,7 +25,11 @@ router.post('/chat=:id', Controller.postChatList)
 router.post('/addroom', Controller.postaddChatRoom);
 router.post('/joinchat/:id', Controller.joinChatRoom);
 
+<<<<<<< HEAD
 router.get('/chat=:id/:roomid', Controller.getChatRoom);
+=======
+router.get('/chat/:id', Controller.getChatRoom);
+>>>>>>> a91c51be34dae1cf4620569eaea8e049807b0d9d
 
 
 module.exports = router;
