@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Noissy</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+  <style>
+    div.userInfoContainer {
+      padding: 1px 14vw;
+      background-color: #212529;
+      color: white;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 4vh 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      text-align: center;
+      float: left;
+    }
+
+    li:last-child {
+      float: right;
+    }
+
+    .userInfo {
+      display: flex;
+    }
+
+    .footerChatBoxPart {
+      /* margin: 0 14vw; */
+      width: 100%;
+    }
+
+    .headerChat {
+      /* background-color: #212529; */
+      /* color: white; */
+      width: 100%;
+      margin: 0 0;
+      padding: 2vh 14vw;
+      display: inline-flex;
+      background-color: #212529;
+      color: white;
+    }
+
+    h2 {
+      margin: 0.39062rem 2rem;
+    }
+
+    /* Chat Message part */
+
+    .chatMessagePart {
+      height: 1%;
+      padding: 0 14vw 16vh 14vw;
+      background-color: blue;
+    }
+
+    /* Footer Chatbox part */
+
+    .footerChatBoxCont {
+      padding: 16px 0;
+      display: block;
+      position: fixed;
+      bottom: 0;
+      width: inherit;
+      background-color: white;
+    }
+
+    .footerChatBox {
+      display: flex;
+    }
+
+    .chatBox {
+      margin-left: 14vw;
+      margin-right: 1.175vw;
+    }
+
+    .chatSubmit {
+      margin-right: 14vw;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- User Info part -->
+
+  <div class="userInfoContainer">
+    <ul>
+
+      <!-- This is User Info -->
+      <li>
+        <div class="userInfo">
+          <img class="nes-avatar is-rounded is-medium" alt="Gravatar image example"
+            src="https://www.gravatar.com/avatar?s=15" style="image-rendering: pixelated;">
+          <h2>#USERNAME#</h2>
+        </div>
+      </li>
+
+      <!-- User Info button part -->
+      <li><button type="button" onclick="location.href='/chat'" class="nes-btn is-primary">Back</button></li>
+    </ul>
+  </div>
+
+  <!-- Chat Message part -->
+
+  <div class="chatMessagePart">
+    <div>
+      <h1>PLACE HOLDER0</h1>
+      <h1>PLACE HOLDER1</h1>
+      <h1>PLACE HOLDER2</h1>
+      <h1>PLACE HOLDER3</h1>
+      <h1>PLACE HOLDER4</h1>
+      <h1>PLACE HOLDER5</h1>
+      <h1>PLACE HOLDER6</h1>
+      <h1>PLACE HOLDER7</h1>
+      <h1>PLACE HOLDER8</h1>
+      <h1>PLACE HOLDER9</h1>
+      <h1>PLACE HOLDER0</h1>
+      <h1>PLACE HOLDER1</h1>
+      <h1>PLACE HOLDER2</h1>
+      <h1>PLACE HOLDER3</h1>
+      <h1>PLACE HOLDER4</h1>
+      <h1>PLACE HOLDER5</h1>
+      <h1>PLACE HOLDER6</h1>
+      <h1>PLACE HOLDER7</h1>
+      <h1>PLACE HOLDER8</h1>
+      <h1>PLACE HOLDER9</h1>
+    </div>
+  </div>
+
+  <!-- Chat Box part -->
+
+  <div class="footerChatBoxPart">
+    <div class="footerChatBoxCont">
+      <div class="footerChatBox">
+        <input type="text" name="typeChat" class="nes-input chatBox">
+        <button type="button" class="nes-btn is-primary chatSubmit">Send</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

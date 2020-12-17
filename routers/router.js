@@ -11,6 +11,6 @@ router.get('/about', (req, res) => res.render('about'));
 
 router.get('/chat', (req, res) => res.send('CHAT LIST PAGE'));
 
-router.get('/chat/:id', (req, res) => res.send('CHAT ROOM PAGE'));
+router.get('/chat/:id', (req, res) => res.render('chatroom'));
 
 module.exports = router;
