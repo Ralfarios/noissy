@@ -157,10 +157,6 @@
       // Emit message to server
       socket.emit('chatMessage', msg);
 
-<<<<<<< HEAD
-=======
-      // CLear input
->>>>>>> a91c51be34dae1cf4620569eaea8e049807b0d9d
       e.target.elements.msg.value = '';
       e.target.elements.msg.focus();
     });
@@ -169,7 +165,6 @@
     const outputMessage = (message) => {
       const div = document.createElement('div');
       div.classList.add('message');
-<<<<<<< HEAD
       // div.innerHTML = `<p>Anon <span>9:12</span></p>
       // <p>
       //   ${message}
@@ -185,12 +180,6 @@
     </div>`;
 
 
-=======
-      div.innerHTML = `<p>username <span>${new Date()}</span></p>
-      <p>
-        ${message}
-      </p>`;
->>>>>>> a91c51be34dae1cf4620569eaea8e049807b0d9d
       document.querySelector('.chatMessagePart').appendChild(div);
     };
   </script>

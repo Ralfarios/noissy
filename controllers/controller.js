@@ -1,6 +1,7 @@
 const { User, ChatRoom, UserChatRoom } = require('../models/index');
 const { comparePass } = require('../helpers/hashPass.js');
 
+
 class Controller {
   static homePage(req, res) {
     console.log(req.session);
@@ -141,7 +142,6 @@ class Controller {
       res.render('chatroom', {data, id})
     })
     .catch(err => res.send(err));
-
   }
 
   static logout(req, res) {
