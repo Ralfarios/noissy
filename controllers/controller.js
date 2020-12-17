@@ -62,13 +62,21 @@ class Controller {
     .then(data => {
       res.render('chatlist', { data });
     }).catch(err => {
-      res.send(err);
+      res.send(err.message);
     })
     
   };
 
   static postChatList(req, res) {
-    res.render('chatlist');
+    const id = {
+      chatroomname: +req.body.chatroomname
+    }
+    User.findAll()
+      .then(data => {
+          res.redirect(`/chat/${id.chatroomname}`);
+      }).catch(err => {
+        res.send(err.message)
+      })
   };
 
   static logout(req, res) {
