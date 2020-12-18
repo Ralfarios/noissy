@@ -6,7 +6,7 @@ const http = require('http');
 const socketio = require('socket.io');
 
 const app = express();
-const port = 3000 || process.env.port;
+const port = process.env.PORT|| 3000;
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -47,4 +47,4 @@ io.on('connection', socket => {
 app.use('/', router);
 
 // Listener
-server.listen(port, () => console.log(`Noissy Chat is successfully executed on port: ${port}.`));
+server.listen(process.env.PORT || port, () => console.log(`Noissy Chat is successfully executed on port: ${port}.`));

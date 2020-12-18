@@ -4,7 +4,8 @@
   "description": "Made by `Muamar Al Farabi` and `Febriansyah` for academic purpose (Pair Project for Phase 1, Glasgow Fox 2020, Hacktiv8).",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
