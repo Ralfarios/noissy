@@ -4,7 +4,7 @@ const { comparePass } = require('../helpers/hashPass.js');
 
 class Controller {
   static homePage(req, res) {
-    console.log(req.session);
+    // console.log(req.session);
     res.render('index');
   };
 
@@ -20,20 +20,15 @@ class Controller {
     };
 
     User.create(input)
-      .then(data => {
-        res.redirect('/login')
-      })
+      .then(() => res.redirect('/login'))
       .catch(err => {
         // console.log(err);
         let errMsg = [];
         if (err.errors) {
-          err.errors.forEach(e => {
-            errMsg.push(e.message);
-          });
+          err.errors.forEach(e => errMsg.push(e.message));
         } else {
           errMsg.push(err);
         };
-        // console.log(err.errors);
         res.send(errMsg);
       });
   };
@@ -65,26 +60,8 @@ class Controller {
         user = data;
         return UserChatRoom.findAll({ where: { UserId: +req.params.id }, include: [ChatRoom] })
       })
-      .then(data => {
-        res.render('chatlist', { user, data });
-      })
-      .catch(err => {
-        res.send(err.message)
-      })
-
-    // let room = null
-    // ChatRoom.findAll()
-    //   .then(data => {
-
-    //     room = data;
-    //     return User.findAll({ where: { id: +req.params.id } })
-    //   }).then(user => {
-    //     console.log(user);
-    //     res.render('chatlist', { room, user });
-    //   }).catch(err => {
-    //     res.send(err.message);
-    //   })
-
+      .then(data => res.render('chatlist', { user, data }))
+      .catch(err => res.send(err.message));
   };
 
   static postChatList(req, res) {
@@ -97,55 +74,39 @@ class Controller {
       .then(data => {
         console.log(data);
         res.redirect(`/chat=${UserId}/${chatRoom.ChatRoomId}`);
-      }).catch(err => {
-        res.send(err.message)
-      })
+      }).catch(err => res.send(err.message))
   };
 
   static postaddChatRoom(req, res) {
     const newChatRoom = {
       chatroomname: req.body.chatroomname
     }
-
-    console.log(req.params.id);
-
     const paramId = +req.body.userid
 
     ChatRoom.create(newChatRoom)
-      .then(data => {
-        console.log(data);
-        // res.redirect(`/chat=${paramId}/`)
-        return UserChatRoom.create({ ChatRoomId: data.id, UserId: paramId })
-      })
+      .then(data => UserChatRoom.create({ ChatRoomId: data.id, UserId: paramId }))
       .then(() => res.redirect(`/chat=${paramId}/`))
       .catch(err => res.send(err));
 
-    console.log(newChatRoom);
-  }
+  };
 
   static joinChatRoom(req, res) {
     const roomName = req.body.roomName
     const userId = +req.params.id;
 
-
     ChatRoom.findAll({ where: { chatroomname: roomName }, include: [UserChatRoom] })
-      .then((data) => {
-        res.redirect(`/chat=${userId}/${data[0].id}`)
-      })
-  }
+      .then(data => res.redirect(`/chat=${userId}/${data[0].id}`))
+      .catch(err => res.send(err));
+  };
 
   static getChatRoom(req, res) {
     let roomid = +req.params.roomid;
     let id = +req.params.id;
 
-    console.log(id)
     UserChatRoom.findAll({ where: { ChatRoomId: roomid }, include: [User, ChatRoom] })
-      .then((data) => {
-        console.log(JSON.stringify(data, null, 2));
-        res.render('chatroom', { data, id })
-      })
+      .then(data => res.render('chatroom', { data, id }))
       .catch(err => res.send(err));
-  }
+  };
 
   static logout(req, res) {
     delete req.session.email;
